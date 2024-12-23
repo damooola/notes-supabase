@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:notes_supabase/main.dart';
 import 'package:notes_supabase/services/notes_services.dart';
-import 'package:provider/provider.dart';
 
 class NotesPage extends StatefulWidget {
-  NotesPage({super.key});
+  const NotesPage({super.key});
 
   @override
   State<NotesPage> createState() => _NotesPageState();
@@ -41,7 +39,12 @@ class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: notesServices.signOut, icon: const Icon(Icons.logout))
+        ],
+      ),
       body: StreamBuilder<List<Map<String, dynamic>>>(
         stream: notesServices.getNotes(),
         builder: (context, snapshot) {
